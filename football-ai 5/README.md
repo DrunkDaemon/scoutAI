@@ -2,7 +2,7 @@
 
 An expected-goals (xG) model trained on ~38,700 real shots from the 2015/16 season of Europe's top 5 leagues, deployed as a static website. The trained model is exported to JavaScript and runs live in the browser (no server needed).
 
-**Live site:** _add your link here_
+**Live site:** https://lovely-paprenjak-040347.netlify.app
 
 ## Website features
 - **Shot Calculator:** click or drag a shot anywhere on the pitch, change defenders, goalkeeper position, body part and situation, and see the xG probability, a live heatmap, and a take-the-shot mini game.
