@@ -43,6 +43,6 @@ Python, pandas, scikit-learn (HistGradientBoosting, GroupKFold, RandomizedSearch
 
 ## Notes
 - Data is from the 2015/16 season, the most recent season where StatsBomb's free open data covers full league seasons.
-- Bundesliga is excluded from the tables: the free data only covers Bayer Leverkusen.
+- Bundesliga is excluded from the tables: hence the free data only covers Bayer Leverkusen.
 
 Fixtures: openfootball (https://github.com/openfootball/football.json). Match data: StatsBomb Open Data (https://github.com/statsbomb/open-data). Please credit StatsBomb if you share this work.
