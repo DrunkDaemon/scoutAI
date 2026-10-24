@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScoutAI — A field guide to expected goals</title>
+<meta name="description" content="A machine-learning expected goals model built on 38,728 real shots from Europe's top five leagues.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="mast">
+  <div class="wrap">
+    <div class="meta"><span>Season 2015/16</span><span>Premier League · La Liga · Serie A · Bundesliga · Ligue 1</span><span id="count"></span></div>
+    <h1>Scout<i>AI</i></h1>
+    <p class="tag">A field guide to expected goals, built from real shots and a machine-learning model that runs right here in your browser.</p>
+  </div>
+  <nav class="wrap" id="nav">
+    <button class="on" data-t="lab">Shot Calculator</button>
+    <button data-t="mc">Match Centre</button>
+    <button data-t="sc">Scouting</button>
+    <button data-t="xp">Lucky &amp; Unlucky</button>
+    <button data-t="fin">Finishers</button>
+    <button data-t="cal">Fixtures</button>
+    <button data-t="mod">The Model</button>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section id="lab">
+    <div class="head"><h2>Where you shoot from <em>changes everything.</em></h2>
+      <p>Expected goals (xG) is the chance that a shot becomes a goal. Move the shot, add defenders, change the keeper, and watch the model react.</p></div>
+    <div class="lab">
+      <form id="ctl" onsubmit="return false"></form>
+      <div class="out">
+        <div class="read">
+          <div><div class="big" id="pv"></div><div class="stamp" id="vd"></div></div>
+          <div><div class="waffle" id="wf"></div><p class="mono sm" id="wl"></p></div>
+        </div>
+        <div class="pitch"><canvas id="c"></canvas><div class="call" id="res"></div></div>
+        <p class="tally mono"><span>Shots<b id="t1">0</b></span><span>Goals<b id="t2">0</b></span><span>Expected<b id="t3">0.0</b></span></p>
+        <p class="note">Click or drag on the pitch to move the shot. Then take it twenty times: your goals will land close to your expected total. That is the whole idea of xG.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="xp" hidden>
+    <div class="head"><h2>Who got the points <em>their chances deserved?</em></h2>
+      <p>Replay every match 2,000 times using only the quality of chances created, and you get each team’s expected points. The gap is luck.</p></div>
+    <div class="pre" id="lg"></div>
+    <ol class="finds" id="fd"></ol>
+    <div class="pre sortrow">Sort by <button data-s="pos">League position</button><button data-s="d">Luck</button></div>
+    <div class="chart" id="xc"></div>
+    <p class="note"><span class="key o"></span> expected points <span class="key f"></span> actual points &nbsp;&nbsp; Red: beat expectation. Blue: fell short.</p>
+  </section>
+
+  <section id="fin" hidden>
+    <div class="head"><h2>Who scored more <em>than they should have?</em></h2>
+      <p>Non-penalty shots, players with 30 or more shots. Finishing luck is noisy over a single season, so read this as a lead, not a verdict.</p></div>
+    <div class="chart" id="fc"></div>
+    <p class="note"><span class="key o"></span> expected goals &nbsp; <span class="key f"></span> actual goals</p>
+  </section>
+
+  <section id="mod" hidden>
+    <div class="head"><h2>How good is <em>the model?</em></h2>
+      <p>Tested on matches it had never seen. The scale starts at 0.5, which is what a coin flip scores.</p></div>
+    <div id="bars"></div>
+    <h3 class="sub">What the model pays attention to</h3>
+    <div id="imp"></div>
+    <div class="steps">
+      <p><b>1. The data.</b> Real shots with the positions of every defender and the goalkeeper at the moment of the shot, from StatsBomb’s open data.</p>
+      <p><b>2. The features.</b> Distance, the angle of the goal as the shooter sees it, defenders in the shooting lane, keeper position, body part and situation.</p>
+      <p><b>3. The model.</b> Gradient boosting, tuned with grouped cross-validation so shots from one match never appear in both training and testing.</p>
+      <p><b>4. The website.</b> The 300 trained trees are exported to JavaScript, so there is no server. Every number you see is computed on your device.</p>
+    </div>
+  </section>
+
+  <section id="mc" hidden>
+    <div class="head"><h2>Replay any match <em>from 2015/16.</em></h2>
+      <p>Every shot, sized by its xG. Then the match is replayed 4,000 times using only the chances created, to see who really deserved to win.</p></div>
+    <div class="pre" id="mcl"></div>
+    <select id="mcs" class="wide"></select>
+    <div id="mco"><p class="note">Loading matches…</p></div>
+  </section>
+
+  <section id="sc" hidden>
+    <div class="head"><h2>Find the player <em>who plays like him.</em></h2>
+      <p>Sixteen per-90 statistics (shooting, passing, carrying, dribbling, defending, pressing) are compared with cosine similarity. Players with 600+ minutes.</p></div>
+    <div class="ctlrow"><input id="scq" list="scd" placeholder="Search a player…" autocomplete="off"><datalist id="scd"></datalist>
+      <label class="ck"><input type="checkbox" id="scp" checked> Same position only</label></div>
+    <div class="two" id="sco"></div>
+  </section>
+
+  <section id="cal" hidden>
+    <div class="head"><h2>What’s on <em>across Europe.</em></h2>
+      <p>Fixtures for the Premier League, La Liga, Serie A, Bundesliga and Ligue 1. Pick a day to see every match.</p></div>
+    <h3 class="sub">Next kick-offs</h3><ol class="next" id="nx"></ol>
+    <div class="pre" id="cf"></div>
+    <div class="calwrap">
+      <div><div class="calhead"><button id="cp" aria-label="Previous month">←</button><h3 id="cm"></h3><button id="cn" aria-label="Next month">→</button></div>
+        <div class="dow"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div class="calg" id="calg"></div></div>
+      <div><h3 class="sub" id="cd"></h3><ul class="daylist" id="cl"></ul></div>
+    </div>
+    <p class="note" id="cn2"></p>
+  </section>
+</main>
+
+<footer class="wrap">Built with Python, scikit-learn and vanilla JavaScript<br>Data: StatsBomb Open Data, season 2015/16 · github.com/statsbomb/open-data</footer>
+
+<script src="js/data.js"></script>
+<script src="js/xg.js"></script>
+<script src="js/app.js"></script>
+<script src="js/features.js"></script>
+</body>
+</html>

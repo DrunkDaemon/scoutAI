@@ -1,0 +1,99 @@
+{
+  "table": {
+    "Baseline (distance+angle)": {
+      "ROC_AUC": 0.7613,
+      "LogLoss": 0.2788,
+      "Brier": 0.0795
+    },
+    "Our model": {
+      "ROC_AUC": 0.821,
+      "LogLoss": 0.2529,
+      "Brier": 0.0726
+    },
+    "StatsBomb xG (benchmark)": {
+      "ROC_AUC": 0.8238,
+      "LogLoss": 0.2513,
+      "Brier": 0.0717
+    }
+  },
+  "best_params": {
+    "min_samples_leaf": 20.0,
+    "max_leaf_nodes": 8.0,
+    "max_iter": 300.0,
+    "learning_rate": 0.03,
+    "l2_regularization": 0.0
+  },
+  "calibration": {
+    "Our model": {
+      "pred": [
+        0.0128,
+        0.0199,
+        0.0264,
+        0.0338,
+        0.0436,
+        0.0548,
+        0.0693,
+        0.0952,
+        0.1673,
+        0.3789
+      ],
+      "actual": [
+        0.0053,
+        0.0199,
+        0.0212,
+        0.0265,
+        0.053,
+        0.0437,
+        0.0807,
+        0.1166,
+        0.1947,
+        0.4114
+      ]
+    },
+    "StatsBomb xG": {
+      "pred": [
+        0.0092,
+        0.0195,
+        0.027,
+        0.0343,
+        0.0438,
+        0.0557,
+        0.0714,
+        0.0958,
+        0.1524,
+        0.3839
+      ],
+      "actual": [
+        0.0127,
+        0.0164,
+        0.0197,
+        0.0279,
+        0.0339,
+        0.0594,
+        0.0747,
+        0.1183,
+        0.1963,
+        0.4185
+      ]
+    }
+  },
+  "importance": {
+    "x": 0.00312,
+    "y_off": 0.00084,
+    "dist": 0.00372,
+    "angle": 0.03946,
+    "def_in_triangle": 0.00846,
+    "nearest_def": 0.00655,
+    "gk_dist_to_goal": 0.00607,
+    "gk_dist_to_shot": 0.01988,
+    "first_time": 0.0,
+    "under_pressure": 0.0,
+    "body_part": 0.00571,
+    "shot_type": 0.00011,
+    "technique": 0.00019,
+    "play_pattern": 0.0
+  },
+  "n_shots": 38728,
+  "n_train_shots": 30764,
+  "n_test_shots": 7554
+}
